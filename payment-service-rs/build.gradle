@@ -1,0 +1,9 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+	implementation project(':payment-service-dao')
+	rootProject.ext.springBootDeps.each { implementation it }
+	rootProject.ext.testDeps.each { testImplementation it }
+	implementation 'com.razorpay:razorpay-java:1.4.5'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}

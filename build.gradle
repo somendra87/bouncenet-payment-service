@@ -1,55 +1,69 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '4.0.5'
-	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.springframework.boot' version '4.0.5' apply false
+	id 'io.spring.dependency-management' version '1.1.7' apply false
 }
 
-group = 'com.bouncenet'
-version = '0.0.1-SNAPSHOT'
+allprojects {
+	group = 'com.bouncenet'
+	version = '0.0.1-SNAPSHOT'
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
+	repositories {
+		mavenCentral()
 	}
-}
-
-repositories {
-	mavenCentral()
 }
 
 ext {
-	set('springCloudVersion', "2025.1.1")
+	springBootDeps = [
+		'org.springframework.boot:spring-boot-starter-data-jpa',
+		'org.springframework.boot:spring-boot-starter-hateoas',
+		'org.springframework.boot:spring-boot-starter-webmvc',
+		'org.springframework.boot:spring-boot-starter-web',
+		'org.springframework.cloud:spring-cloud-starter-config',
+		'com.fasterxml.jackson.core:jackson-databind',
+		'org.springframework.boot:spring-boot-starter-validation',
+		'org.flywaydb:flyway-core',
+		'org.flywaydb:flyway-database-postgresql'
+	]
+
+	testDeps = [
+		'org.springframework.boot:spring-boot-starter-data-jpa-test',
+		'org.springframework.boot:spring-boot-starter-hateoas-test',
+		'org.springframework.boot:spring-boot-starter-webmvc-test'
+	]
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
-	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	implementation 'com.fasterxml.jackson.core:jackson-databind'
+subprojects {
+	apply plugin: 'java'
 
-	// Razorpay
-	implementation 'com.razorpay:razorpay-java:1.4.5'
+	java {
+		toolchain {
+			languageVersion = JavaLanguageVersion.of(25)
+		}
+	}
 
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-hateoas-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-	testCompileOnly 'org.projectlombok:lombok'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	testAnnotationProcessor 'org.projectlombok:lombok'
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	tasks.named('test') {
+		useJUnitPlatform()
 	}
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+configure(subprojects.findAll { it.name != 'payment-service-schema' }) {
+	apply plugin: 'io.spring.dependency-management'
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.boot:spring-boot-dependencies:4.0.5"
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:2025.1.1"
+		}
+	}
+
+	dependencies {
+		implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+		runtimeOnly 'org.postgresql:postgresql'
+		testCompileOnly 'org.projectlombok:lombok'
+		testAnnotationProcessor 'org.projectlombok:lombok'
+		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	}
 }

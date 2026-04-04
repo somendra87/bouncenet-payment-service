@@ -1,0 +1,4 @@
+dependencies {
+	rootProject.ext.springBootDeps.each { implementation it }
+	rootProject.ext.testDeps.each { testImplementation it }
+}
