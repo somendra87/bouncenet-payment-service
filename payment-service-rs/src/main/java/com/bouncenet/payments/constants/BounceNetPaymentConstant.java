@@ -9,4 +9,14 @@ package com.bouncenet.payments.constants;
  * @since 03/04/26
  */
 public enum BounceNetPaymentConstant {
+  PAYMENT_CAPTURE_EVENT("payment.capture");
+
+  private final String name;
+  BounceNetPaymentConstant(String name) {
+    this.name = name;
+  }
+
+  public String getName(){
+    return this.name;
+  }
 }

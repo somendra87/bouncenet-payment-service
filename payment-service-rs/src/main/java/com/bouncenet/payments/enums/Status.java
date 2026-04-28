@@ -16,7 +16,7 @@ import java.util.Map;
  * @since 03/04/26
  */
 public enum Status {
-  CREATED("CREATED"), FAILED("FAILED");
+  CREATED("CREATED"), PAID("PAID"), FAILED("FAILED");
 
   private final String type;
 

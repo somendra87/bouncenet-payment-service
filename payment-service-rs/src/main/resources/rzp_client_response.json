@@ -1,0 +1,14 @@
+{
+  "amount" : 10000,
+  "amount_paid" : 0,
+  "notes" : [ ],
+  "created_at" : 1775395785,
+  "amount_due" : 10000,
+  "currency" : "INR",
+  "receipt" : "38107fb6-0ccd-40db-bbe2-ae5960b8d7a7",
+  "id" : "order_SZpPdo6HOT81ks",
+  "entity" : "order",
+  "offer_id" : null,
+  "attempts" : 0,
+  "status" : "created"
+}

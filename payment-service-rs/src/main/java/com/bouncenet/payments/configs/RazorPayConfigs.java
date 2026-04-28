@@ -12,10 +12,17 @@ import org.springframework.stereotype.Component;
  * @project bouncenet-payment-service
  * @since 03/04/26
  */
-@Component
 @Data
 @ConfigurationProperties(prefix = "razorpay")
 public class RazorPayConfigs {
   private String razorPayId;
   private String razorPaySecret;
+  private WebHook webHook;
+
+  @Data
+  public static class WebHook {
+    private String webhookUrl;
+    private String webhookSecret;
+  }
+
 }

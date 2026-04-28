@@ -7,8 +7,8 @@ spring:
     include: razor
   application:
     name: bouncenet-payment-service-v1
-  config:
-    import: optional:configserver:http://localhost:9701/api/bouncenet-config-server
+  #config:
+   # import: optional:configserver:http://localhost:9701/api/bouncenet-config-server
   jpa:
     hibernate:
       ddl-auto: validate
@@ -29,3 +29,8 @@ eureka:
       fetch-registry: true
     instance:
       prefer-ip-address: true
+
+
+# command to create webhook url
+# npx localtunnel --port 9700 --subdomain bouncenet-payment
+webhook-url:  https://bouncenet-payment.loca.lt
