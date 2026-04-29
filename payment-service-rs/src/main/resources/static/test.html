@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="pay()">Pay Now</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    function pay() {
+        var rzp = new Razorpay({
+                                   key: 'rzp_test_SYyYQe3FWpovsd',
+                                   order_id: 'order_SjHdHwHmIIIcm2',
+                                   amount: 199,
+                                   currency: 'INR',
+                                   name: 'BounceNet'
+                               });
+        rzp.open();
+    }
+</script>
+</body>
+</html>

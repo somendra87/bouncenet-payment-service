@@ -5,3 +5,6 @@ razorpay:
   webhook:
     webhookUrl: https://bouncenet-payment.loca.lt
     webhookSecret: webhook_secret123
+
+# ssh tunneling for webhook
+# ssh -R 80:localhost:9700 serveo.net

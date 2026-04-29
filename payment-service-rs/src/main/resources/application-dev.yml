@@ -40,3 +40,7 @@ eureka:
     enabled: false
   instance:
     prefer-ip-address: true
+
+logging:
+  level:
+    com.bouncenet.payments: DEBUG
