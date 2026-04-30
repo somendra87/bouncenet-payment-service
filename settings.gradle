@@ -1,1 +1,5 @@
 rootProject.name = 'bouncenet-payment-service'
+
+include 'payment-service-rs'
+include 'payment-service-schema'
+include 'payment-service-dao'

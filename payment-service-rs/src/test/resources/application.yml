@@ -1,0 +1,13 @@
+spring:
+  config:
+    import: optional:configserver:http://localhost:9701
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
+      - org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration
+  flyway:
+    enabled: false
+
+razorpay:
+  razor-pay-id: rzp_test_dummy
+  razor-pay-secret: dummy_secret

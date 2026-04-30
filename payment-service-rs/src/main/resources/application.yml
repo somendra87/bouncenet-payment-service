@@ -1,0 +1,36 @@
+server:
+  servlet:
+    context-path: '/api/payment-service'
+  port: 9700
+spring:
+  profiles:
+    include: razor
+  application:
+    name: bouncenet-payment-service-v1
+  #config:
+   # import: optional:configserver:http://localhost:9701/api/bouncenet-config-server
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+      register-with-eureka: true
+      fetch-registry: true
+    instance:
+      prefer-ip-address: true
+
+
+# command to create webhook url
+# npx localtunnel --port 9700 --subdomain bouncenet-payment
+webhook-url:  https://bouncenet-payment.loca.lt
